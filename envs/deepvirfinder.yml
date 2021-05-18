@@ -8,4 +8,4 @@ dependencies:
   - scikit-learn 
   - Biopython 
   - h5py
-  - theano==1.0.3
+  - theano=1.0.3
