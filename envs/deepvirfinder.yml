@@ -1,0 +1,13 @@
+name: dvf
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.6
+  - numpy 
+  - keras=2.2.4 
+  - scikit-learn 
+  - Biopython 
+  - h5py
+  - pip:
+    - theano==1.0.5

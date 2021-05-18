@@ -1,0 +1,1 @@
+rsync -avn --rsh="ssh -l liwz -i /home/liwz/.ssh/jcvi-us-west-2.pem" . liwz@weizhongli-lab.org:/home/oasis/data/etc/git/cdhit/usecases/Miseq-16S/

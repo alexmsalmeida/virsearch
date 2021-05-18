@@ -1,0 +1,9 @@
+name: checkv
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - checkv
+  - r_env 
+  - r-essentials 
+  - r-base

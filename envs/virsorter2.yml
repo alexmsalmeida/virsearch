@@ -1,0 +1,6 @@
+name: vs2
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - virsorter=2

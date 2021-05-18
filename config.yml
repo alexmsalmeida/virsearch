@@ -1,0 +1,14 @@
+# Input directory
+
+input: # must contain .fa files
+    "test/input"
+
+# output directory
+
+output: # directory to store results (one folder per input file)
+    "test/output"
+
+# database folder
+
+data: # must contain virsorter2, checkv, vibrant and dvf database files
+    "databases" 

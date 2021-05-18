@@ -1,0 +1,35 @@
+__default__:
+    mem: 5000
+    nCPU: 1
+    name: "{rule}"
+    output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
+
+vs2_detect:
+    mem : 10000
+    nCPU: 8
+    output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
+
+dvf_detect:
+    mem : 30000
+    nCPU: 4
+    output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
+
+vibrant_detect:
+    mem : 10000
+    nCPU: 4
+    output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
+
+checkv_analysis:
+    mem : 50000
+    nCPU: 8
+    output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
+
+dereplicate:
+    mem : 30000
+    nCPU: 4
+    output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
+
+tax_class:
+    mem : 20000
+    nCPU: 4
+    output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
