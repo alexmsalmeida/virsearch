@@ -14,9 +14,9 @@ git clone https://github.com/alexmsalmeida/virsearch.git
 2. Download and extract necessary databases
 
 ```
-cd vsearch
-wget ftp...
-tar -xzvf
+cd virsearch
+wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/genome_sets/databases.tar.gz
+tar -xzvf databases.tar.gz
 ```
 
 ## How to run
