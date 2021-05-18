@@ -2,7 +2,7 @@
 
 Snakemake workflow to detect and classify viruses in metagenome assemblies.
 
-It first detects viral sequences in assemblies (.fa files) with <b>VirSorter2</b>, <b>VIBRANT</b> and <b>DeepVirFinder</b>. Predictions are strictly quality controlled with <b>CheckV</b>, followed by clustering with <b>CD-HIT</b> and taxonomic classification with <b>DemoVir</b>.
+It first detects viral sequences in assemblies (`.fa` files) with <b>VirSorter2</b>, <b>VIBRANT</b> and <b>DeepVirFinder</b>. Predictions are strictly quality controlled with <b>CheckV</b>, followed by clustering with <b>CD-HIT</b> and taxonomic classification with <b>DemoVir</b>.
 
 ## Installation
 
@@ -21,7 +21,7 @@ tar -xzvf databases.tar.gz
 
 ## How to run
 
-1. Edit config.yml file to point to the input and output directories. Input directories should contain the <b>.fa</b> assemblies to analyse.
+1. Edit config.yml file to point to the input and output directories. Input directories should contain the `.fa` assemblies to analyse.
 
 2. (option 1) Run the pipeline locally (adjust -j based on the number of available cores)
 ```
