@@ -1,4 +1,4 @@
-# virsearch - analysing viral sequences in metagenomes
+# VirSearch - searching viral sequences in metagenomes
 
 Snakemake workflow to detect and classify viruses in metagenome assemblies.
 
