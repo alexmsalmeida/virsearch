@@ -13,7 +13,6 @@ IDS, = glob_wildcards(INPUT_DIR+"/{id}.fa")
 os.system("chmod -R +x tools")
 
 for sample in IDS:
-    print(sample)
     if not os.path.exists(OUTPUT_DIR+"/"+sample+"/logs"):
         os.makedirs(OUTPUT_DIR+"/"+sample+"/logs")
 
