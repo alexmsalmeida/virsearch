@@ -15,8 +15,8 @@ git clone https://github.com/alexmsalmeida/virsearch.git
 
 ```
 cd virsearch
-wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/genome_sets/databases.tar.gz
-tar -xzvf databases.tar.gz
+wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/genome_sets/viral_databases.tar.gz
+tar -xzvf viral_databases.tar.gz
 ```
 
 ## How to run
