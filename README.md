@@ -23,11 +23,11 @@ tar -xzvf
 
 1. Edit config.yml file to point to the input and output directories. Input directories should contain the .fa assemblies to analyse.
 
-2.1. Run the pipeline locally (adjust -j based on the number of available cores)
+2. (option 1) Run the pipeline locally (adjust -j based on the number of available cores)
 ```
 snakemake --use-conda -j 4
 ```
-2.2. Run the pipeline on a cluster (e.g. LSF)
+2. (option 2) Run the pipeline on a cluster (e.g. LSF)
 ```
 snakemake --use-conda -j 50 --cluster-config cluster.yml --cluster "bsub -n {cluster.nCPU} -M {cluster.mem} -o {cluster.output}"
 ```
