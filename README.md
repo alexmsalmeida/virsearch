@@ -6,12 +6,14 @@ It first detects viral sequences in assemblies (`.fa` files) with [VirSorter2](h
 
 ## Installation
 
-1. Clone repository
+1. Install [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) and [snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html)
+
+2. Clone repository
 ```
 git clone https://github.com/alexmsalmeida/virsearch.git
 ```
 
-2. Download and extract necessary databases (uncompressed directory will require a total of 30 GB).
+3. Download and extract necessary databases (uncompressed directory will require a total of 30 GB).
 
 ```
 cd virsearch
