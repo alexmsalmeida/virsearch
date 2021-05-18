@@ -11,7 +11,7 @@ It first detects viral sequences in assemblies (`.fa` files) with <b>VirSorter2<
 git clone https://github.com/alexmsalmeida/virsearch.git
 ```
 
-2. Download and extract necessary databases
+2. Download and extract necessary databases (uncompressed directory will require a total of 30 GB).
 
 ```
 cd virsearch
