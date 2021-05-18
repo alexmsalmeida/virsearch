@@ -10,7 +10,7 @@ It first detects viral sequences in assemblies (`.fa` files) with [VirSorter2](h
 
 2. Clone repository
 ```
-git clone https://github.com/alexmsalmeida/virsearch.git
+git clone --recursive https://github.com/alexmsalmeida/virsearch.git
 ```
 
 3. Download and extract necessary databases (uncompressed directory will require a total of 30 GB).
