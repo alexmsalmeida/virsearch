@@ -23,7 +23,7 @@ tar -xzvf databases.tar.gz
 
 1. Edit `config.yml` file to point to the <b>input</b> and <b>output</b> directories. Input directories should contain the `.fa` assemblies to analyse.
 
-2. (option 1) Run the pipeline locally (adjust -j based on the number of available cores)
+2. (option 1) Run the pipeline locally (adjust `-j` based on the number of available cores)
 ```
 snakemake --use-conda -j 4
 ```
