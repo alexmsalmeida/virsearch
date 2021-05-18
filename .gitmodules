@@ -1,0 +1,3 @@
+[submodule "tools/DeepVirFinder"] 
+  path = tools/DeepVirFinder 
+  url = https://github.com/jessieren/DeepVirFinder.git
