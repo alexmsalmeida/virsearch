@@ -31,7 +31,7 @@ snakemake --use-conda -j 4
 ```
 2. (option 2) Run the pipeline on a cluster (e.g., LSF)
 ```
-snakemake --use-conda -j 50 --cluster-config cluster.yml --cluster "bsub -n {cluster.nCPU} -M {cluster.mem} -o {cluster.output}"
+snakemake --use-conda -j 50 --cluster-config cluster.yml --cluster 'bsub -n {cluster.nCPU} -M {cluster.mem} -o {cluster.output}'
 ```
 
 ## Output
