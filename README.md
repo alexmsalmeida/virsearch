@@ -36,4 +36,4 @@ snakemake --use-conda -k -j 100 --cluster-config cluster.yml --cluster 'bsub -n 
 
 ## Output
 
-The main output files generated per input FASTA are the `final_predictions.fa` and `final_predictions_tax.tsv` files, which contain the viral sequences in FASTA format and their taxonomic annotation, respectively.
+The main output files generated per input FASTA are the `final_predictions.fa` and `final_predictions_tax.tsv` files, which contain the viral sequences in FASTA format and their taxonomic annotation, respectively. If none of these files are present it likely means that no high-confidence viral sequences were detected (double check logs for other possible sources of errors).
