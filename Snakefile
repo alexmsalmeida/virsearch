@@ -34,7 +34,7 @@ rule vs2_detect:
     conda:
         "envs/virsorter2.yml"
     shell:  
-        "virsorter run -j 8 -i {input} --db-dir {params.database} -w {params.outdir} --min-length 10000 all"
+        "virsorter run -j 8 -i {input} --db-dir {params.database} -w {params.outdir} --min-length 10000 all || touch {output}"
 
 rule vs2_rename:
     input:
@@ -58,7 +58,7 @@ rule dvf_detect:
     conda:
         "envs/deepvirfinder.yml"
     shell:
-        "tools/DeepVirFinder/dvf.py -i {input} -m {params.database} -o {params.outdir} -l 10000 -c 4"
+        "tools/DeepVirFinder/dvf.py -i {input} -m {params.database} -o {params.outdir} -l 10000 -c 4 || touch {output}"
 
 rule dvf_filter:
     input:
@@ -91,7 +91,7 @@ rule vibrant_detect:
     conda:
         "envs/vibrant.yml"
     shell:
-        "VIBRANT_run.py -t 4 -d {params.database} -i {input} -folder {params.outdir} -l 10000 -no_plot"
+        "VIBRANT_run.py -t 4 -d {params.database} -i {input} -folder {params.outdir} -l 10000 -no_plot || mkdir $(dirname {output}) && touch {output}"
 
 rule vibrant_rename:
     input:
