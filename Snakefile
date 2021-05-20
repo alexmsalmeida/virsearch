@@ -8,7 +8,7 @@ configfile: "config.yml"
 INPUT_DIR = config["input"]
 OUTPUT_DIR = config["output"]
 
-IDS, = glob_wildcards(INPUT_DIR+"/{id}.fa")
+IDS = glob_wildcards(INPUT_DIR+"/{id}.fa").id
 
 os.system("chmod -R +x tools")
 
@@ -118,9 +118,7 @@ rule checkv_analysis:
     input:
         OUTPUT_DIR+"/{id}/checkv/viral_sequences.fa"
     output:
-        OUTPUT_DIR+"/{id}/checkv/checkv_output/quality_summary.tsv",
-        OUTPUT_DIR+"/{id}/checkv/checkv_output/proviruses.fna",
-        OUTPUT_DIR+"/{id}/checkv/checkv_output/viruses.fna" 
+        OUTPUT_DIR+"/{id}/checkv/checkv_output/quality_summary.tsv"
     params:
         outdir = OUTPUT_DIR+"/{id}/checkv/checkv_output/",
         database = config['data']+"/checkv/checkv-db-v1.0"
@@ -139,18 +137,18 @@ rule checkv_select:
 
 rule checkv_filter:
     input:
-        pred = OUTPUT_DIR+"/{id}/checkv/checkv_output/quality_summary_filtered.tsv",
-        prov = OUTPUT_DIR+"/{id}/checkv/checkv_output/proviruses.fna",
-        vir = OUTPUT_DIR+"/{id}/checkv/checkv_output/viruses.fna"
+        OUTPUT_DIR+"/{id}/checkv/checkv_output/quality_summary_filtered.tsv",
     output:
         all = OUTPUT_DIR+"/{id}/checkv/checkv_output/trimmed_predictions.fa",
         final = OUTPUT_DIR+"/{id}/checkv/checkv_output/filtered_predictions.fa"
+    params:
+        indir = OUTPUT_DIR+"/{id}/checkv/checkv_output/"
     conda:
         "envs/checkv.yml"
     shell:
         """
-        cat {input.prov} {input.vir} > {output.all}
-        tools/filter_checkv.py {output.all} {input.pred} {output.final}
+        cat {params.indir}*fna > {output.all}
+        tools/filter_checkv.py {output.all} {input} {output.final}
         """
 
 # cluster sequences
