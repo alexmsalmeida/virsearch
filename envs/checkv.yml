@@ -4,4 +4,5 @@ channels:
   - bioconda
 dependencies:
   - checkv
+  - cd-hit
   - r=3.6.0

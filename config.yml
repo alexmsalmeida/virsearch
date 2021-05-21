@@ -8,6 +8,11 @@ input: # must contain .fa files
 output: # directory to store results (one folder per input file)
     "test/output"
 
+# tools
+
+usearch_binary:
+    "tools/usearch"
+
 # database folder
 
 data: # must contain virsorter2, checkv, vibrant and dvf database files

@@ -9,8 +9,6 @@ taxa_file = paste(args[2],"TrEMBL_viral_taxa.RDS", sep="/")
 taxa = readRDS(taxa_file)
 rownames(taxa) = taxa$id
 results2 = data.frame(results,taxa[as.character(results$subject),])
-head(results2)
-
 
 results3 = results2
 
