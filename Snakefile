@@ -44,11 +44,14 @@ rule vs2_detect:
         OUTPUT_DIR+"/{id}/virsorter2/final-viral-combined.fa"
     params:
         outdir = OUTPUT_DIR+"/{id}/virsorter2",
-        database = config['data']+"/vs2"
+        database = config['database']+"/vs2"
     conda:
         "envs/virsorter2.yml"
     shell:  
-        "virsorter run -j 8 -i {input} --db-dir {params.database} -w {params.outdir} --min-length 10000 all || touch {output}"
+        """
+        rm -rf {params.outdir}
+        virsorter run -j 8 -i {input} --db-dir {params.database} -w {params.outdir} --min-length 10000 all || touch {output}
+        """
 
 rule vs2_rename:
     input:
@@ -68,11 +71,14 @@ rule dvf_detect:
         OUTPUT_DIR+"/{id}/deepvirfinder/{id}.fa_gt10000bp_dvfpred.txt"
     params:
         outdir = OUTPUT_DIR+"/{id}/deepvirfinder",
-        database = config['data']+"/models"
+        database = config['database']+"/models"
     conda:
         "envs/deepvirfinder.yml"
     shell:
-        "tools/DeepVirFinder/dvf.py -i {input} -m {params.database} -o {params.outdir} -l 10000 -c 4 || touch {output}"
+        """
+        rm -rf {params.outdir}
+        tools/DeepVirFinder/dvf.py -i {input} -m {params.database} -o {params.outdir} -l 10000 -c 4 || touch {output}
+        """
 
 rule dvf_filter:
     input:
@@ -101,11 +107,14 @@ rule vibrant_detect:
         OUTPUT_DIR+"/{id}/vibrant/VIBRANT_{id}/VIBRANT_phages_{id}/{id}.phages_combined.fna"
     params:
         outdir = OUTPUT_DIR+"/{id}/vibrant",
-        database = config['data']+"/databases"
+        database = config['database']+"/databases"
     conda:
         "envs/vibrant.yml"
     shell:
-        "VIBRANT_run.py -t 4 -d {params.database} -i {input} -folder {params.outdir} -l 10000 -no_plot || mkdir $(dirname {output}) && touch {output}"
+        """
+        rm -rf {params.outdir}
+        VIBRANT_run.py -t 4 -d {params.database} -i {input} -folder {params.outdir} -l 10000 -no_plot || mkdir -p $(dirname {output}) && touch {output}
+        """
 
 rule vibrant_rename:
     input:
@@ -144,11 +153,14 @@ rule checkv_analysis:
         OUTPUT_DIR+"/{id}/checkv/checkv_output/quality_summary.tsv"
     params:
         outdir = OUTPUT_DIR+"/{id}/checkv/checkv_output/",
-        database = config['data']+"/checkv/checkv-db-v1.0"
+        database = config['database']+"/checkv/checkv-db-v1.0"
     conda:
         "envs/checkv.yml"
     shell:
-        "checkv end_to_end -t 8 -d {params.database} {input} {params.outdir}"
+        """
+        rm -rf {params.outdir}
+        checkv end_to_end -t 8 -d {params.database} {input} {params.outdir}
+        """
 
 checkpoint checkv_filter:
     input:
@@ -191,7 +203,7 @@ rule tax_class:
         contig_ids = OUTPUT_DIR+"/{id}/demovir/trembl_ublast.viral.u.contigID.txt"
     params:
         demovir_dir = directory(OUTPUT_DIR+"/{id}/demovir"),
-        database = config['data']+"/demovir",
+        database = config['database']+"/demovir",
         usearch = config["usearch_binary"]
     conda:
         "envs/checkv.yml"

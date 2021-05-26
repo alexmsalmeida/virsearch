@@ -1,12 +1,12 @@
 # Input directory
 
 input: # must contain .fa files
-    "test/input"
+    "/hps/nobackup2/production/metagenomics/aalmeida/project_latinbiota/metaspades"
 
 # output directory
 
 output: # directory to store results (one folder per input file)
-    "test/output"
+    "/hps/nobackup2/production/metagenomics/aalmeida/project_latinbiota/virsearch_wf"
 
 # tools
 
@@ -15,5 +15,5 @@ usearch_binary:
 
 # database folder
 
-data: # must contain virsorter2, checkv, vibrant and dvf database files
-    "databases" 
+database: # must contain virsorter2, checkv, vibrant and dvf database files
+    "/hps/nobackup2/production/metagenomics/aalmeida/databases/virsearch_db" 

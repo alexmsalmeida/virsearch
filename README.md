@@ -16,14 +16,13 @@ git clone --recursive https://github.com/alexmsalmeida/virsearch.git
 3. Download and extract necessary databases (uncompressed directory will require a total of 30 GB).
 
 ```
-cd virsearch
 wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/genome_sets/viral_databases.tar.gz
 tar -xzvf viral_databases.tar.gz
 ```
 
 ## How to run
 
-1. Edit `config.yml` file to point to the <b>input</b> and <b>output</b> directories, as well as the [USEARCH](https://www.drive5.com/usearch/download.html) binary location (`usearch_binary`). Input directory should contain the `.fa` assemblies to analyse.
+1. Edit `config.yml` file to point to the <b>input</b>, <b>output</b> and <b>databases</b>directories, as well as the [USEARCH](https://www.drive5.com/usearch/download.html) binary location (`usearch_binary`). Input directory should contain the `.fa` assemblies to analyse.
 
 2. (option 1) Run the pipeline locally (adjust `-j` based on the number of available cores)
 ```
@@ -36,4 +35,4 @@ snakemake --use-conda -k -j 100 --cluster-config cluster.yml --cluster 'bsub -n 
 
 ## Output
 
-The main output files generated per input FASTA are the `final_predictions.fa` and `final_predictions_tax.tsv` files, which contain the viral sequences in FASTA format and their taxonomic annotation, respectively. If these files are empty it means that no high-confidence viral sequences were detected.
+The main output files generated per input FASTA are the `final_predictions.fa` and `final_predictions_tax.tsv` files, which contain the viral sequences in FASTA format and their taxonomic annotation, respectively. If these files are empty it likely means that no high-confidence viral sequences were detected (check individual logs of the tools to confirm no other issues arose).
