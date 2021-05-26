@@ -22,7 +22,7 @@ tar -xzvf viral_databases.tar.gz
 
 ## How to run
 
-1. Edit `config.yml` file to point to the <b>input</b>, <b>output</b> and <b>databases</b>directories, as well as the [USEARCH](https://www.drive5.com/usearch/download.html) binary location (`usearch_binary`). Input directory should contain the `.fa` assemblies to analyse.
+1. Edit `config.yml` file to point to the <b>input</b>, <b>output</b> and <b>databases</b> directories, as well as the [USEARCH](https://www.drive5.com/usearch/download.html) binary location (`usearch_binary`). Input directory should contain the `.fa` assemblies to analyse.
 
 2. (option 1) Run the pipeline locally (adjust `-j` based on the number of available cores)
 ```
