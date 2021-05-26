@@ -16,8 +16,8 @@ git clone --recursive https://github.com/alexmsalmeida/virsearch.git
 3. Download and extract necessary databases (uncompressed directory will require a total of 30 GB).
 
 ```
-wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/genome_sets/viral_databases.tar.gz
-tar -xzvf viral_databases.tar.gz
+wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/genome_sets/virsearch_db.tar.gz
+tar -xzvf virsearch_db.tar.gz
 ```
 
 ## How to run

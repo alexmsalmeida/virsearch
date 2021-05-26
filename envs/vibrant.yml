@@ -2,4 +2,5 @@ name: vibrant
 channels:
   - bioconda
 dependencies:
+  - numpy=1.19
   - vibrant=1.2.1

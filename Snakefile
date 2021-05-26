@@ -37,12 +37,28 @@ rule all:
         expand(OUTPUT_DIR+"/{id}/final_predictions_tax.tsv", id=IDS)
 
 # virsorter 2
+rule vs2_setup:
+    input:
+        config['database']
+    output:
+        config['database']+"/vs2/Done_all_setup"
+    params:
+        outdir = config['database']+"/vs2"
+    conda:
+        "envs/virsorter2.yml"
+    shell:
+        """
+        virsorter setup -d {params.outdir} -j 4
+        """
+        
 rule vs2_detect:
     input:  
-        INPUT_DIR+"/{id}.fa"
+        fa = INPUT_DIR+"/{id}.fa",
+        db = config['database']+"/vs2/Done_all_setup"
     output: 
-        OUTPUT_DIR+"/{id}/virsorter2/final-viral-combined.fa"
+        OUTPUT_DIR+"/{id}/virsorter2/viral_sequences.fa"
     params:
+        raw = OUTPUT_DIR+"/{id}/virsorter2/final-viral-combined.fa",
         outdir = OUTPUT_DIR+"/{id}/virsorter2",
         database = config['database']+"/vs2"
     conda:
@@ -50,18 +66,9 @@ rule vs2_detect:
     shell:  
         """
         rm -rf {params.outdir}
-        virsorter run -j 8 -i {input} --db-dir {params.database} -w {params.outdir} --min-length 10000 all || touch {output}
+        virsorter run -j 8 -i {input.fa} --db-dir {params.database} -w {params.outdir} --min-length 10000 all || touch {params.raw}
+        tools/rename_multifasta_prefix.py -f {params.raw} -p VS2 > {output}
         """
-
-rule vs2_rename:
-    input:
-        OUTPUT_DIR+"/{id}/virsorter2/final-viral-combined.fa"
-    output:
-        OUTPUT_DIR+"/{id}/virsorter2/viral_sequences.fa"
-    conda:
-        "envs/virsorter2.yml"
-    shell:
-        "tools/rename_multifasta_prefix.py -f {input} -p VS2 > {output}"
 
 # deepvirfinder
 rule dvf_detect:
@@ -104,27 +111,24 @@ rule vibrant_detect:
     input:
         INPUT_DIR+"/{id}.fa"
     output:
-        OUTPUT_DIR+"/{id}/vibrant/VIBRANT_{id}/VIBRANT_phages_{id}/{id}.phages_combined.fna"
+        OUTPUT_DIR+"/{id}/vibrant/viral_sequences.fa"
     params:
+        phages = OUTPUT_DIR+"/{id}/vibrant/VIBRANT_{id}/VIBRANT_phages_{id}/{id}.phages_combined.fna",
         outdir = OUTPUT_DIR+"/{id}/vibrant",
-        database = config['database']+"/databases"
+        database = config['database']+"/databases",
+        files = config['database']+"/files"
     conda:
         "envs/vibrant.yml"
     shell:
         """
         rm -rf {params.outdir}
-        VIBRANT_run.py -t 4 -d {params.database} -i {input} -folder {params.outdir} -l 10000 -no_plot || mkdir -p $(dirname {output}) && touch {output}
+        VIBRANT_run.py -t 4 -d {params.database} -m {params.files} -i {input} -folder {params.outdir} -l 10000 -no_plot || true
+        if [[ ! -f {params.phages} ]]; then
+            mkdir -p {params.outdir} && touch {output}
+        else
+            tools/rename_multifasta_prefix.py -f {params.phages} -p VIBRANT > {output}
+        fi
         """
-
-rule vibrant_rename:
-    input:
-        OUTPUT_DIR+"/{id}/vibrant/VIBRANT_{id}/VIBRANT_phages_{id}/{id}.phages_combined.fna"
-    output:
-        OUTPUT_DIR+"/{id}/vibrant/viral_sequences.fa"
-    conda:
-        "envs/vibrant.yml"
-    shell:
-        "tools/rename_multifasta_prefix.py -f {input} -p VIBRANT > {output}"
 
 # checkv
 checkpoint checkv_input:

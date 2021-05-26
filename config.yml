@@ -1,19 +1,13 @@
-# Input directory
+# Snakemake configuration
 
-input: # must contain .fa files
-    "/hps/nobackup2/production/metagenomics/aalmeida/project_latinbiota/metaspades"
+input:
+    "test/input" # path to input directory with .fa files
 
-# output directory
-
-output: # directory to store results (one folder per input file)
-    "/hps/nobackup2/production/metagenomics/aalmeida/project_latinbiota/virsearch_wf"
-
-# tools
+output: 
+    "test/output" # path to output directory
 
 usearch_binary:
-    "tools/usearch"
+    "tools/usearch" # path to usearch binary
 
-# database folder
-
-database: # must contain virsorter2, checkv, vibrant and dvf database files
-    "/hps/nobackup2/production/metagenomics/aalmeida/databases/virsearch_db" 
+database: 
+    "virsearch_db" # path to database folder

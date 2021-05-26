@@ -4,6 +4,11 @@ __default__:
     name: "{rule}"
     output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
 
+vs2_setup:
+    mem : 5000
+    nCPU: 4
+    output: "{OUTPUT_DIR}/vs2_setup.log"
+
 vs2_detect:
     mem : 10000
     nCPU: 8
