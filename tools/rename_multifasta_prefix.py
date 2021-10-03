@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import argparse
 import sys
@@ -7,9 +7,9 @@ def ren_fasta(args):
     for line in open(args.fasta_file, "rU"):
         if line[0] == ">":
             name = line.strip("\n").replace(">","")
-            print ">%s_%s" % (args.prefix, name)
+            print(">%s_%s" % (args.prefix, name))
         else:
-            print line.strip("\n")
+            print(line.strip("\n"))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Rename multifasta file')
@@ -20,5 +20,4 @@ if __name__ == '__main__':
         sys.exit(1)
     else:
         args = parser.parse_args()
-        ren_fasta(args)	
-
+        ren_fasta(args)
