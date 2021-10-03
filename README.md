@@ -6,7 +6,7 @@ It first detects viral sequences in assemblies (`.fa` files) with [VirSorter2](h
 
 ## Installation
 
-1. Install [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html), [snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) and [USEARCH](https://www.drive5.com/usearch/download.html).
+1. Install [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html), [snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) (tested v6.3.0) and [USEARCH](https://www.drive5.com/usearch/download.html).
 
 2. Clone repository
 ```
