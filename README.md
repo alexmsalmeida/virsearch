@@ -28,9 +28,9 @@ tar -xzvf virsearch_db.tar.gz
 ```
 snakemake --use-conda -k -j 4
 ```
-2. (option 2) Run the pipeline on a cluster (e.g., LSF)
+2. (option 2) Run the pipeline on a cluster (e.g., SLURM)
 ```
-snakemake --use-conda -k -j 100 --cluster-config cluster.yml --cluster 'bsub -n {cluster.nCPU} -M {cluster.mem} -o {cluster.output}'
+snakemake --use-conda -k -j 100 --cluster-config cluster.yml --cluster 'sbatch -A ALMEIDA-SL3-CPU -p icelake-himem --time=12:00:00 --ntasks={cluster.nCPU} --mem={cluster.mem} -o {cluster.output}'
 ```
 
 ## Output
