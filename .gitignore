@@ -1,0 +1,3 @@
+tools/usearch
+test/output/
+.snakemake/

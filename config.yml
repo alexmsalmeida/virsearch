@@ -1,13 +1,13 @@
 # Snakemake configuration
 
 input:
-    "test/input" # path to input directory with .fa files
+    "/rds/user/aa2369/hpc-work/scripts/snakemake/virsearch/test/input" # path to input directory with .fa files
 
-output: 
-    "test/output" # path to output directory
+output:
+    "/rds/user/aa2369/hpc-work/scripts/snakemake/virsearch/test/output" # path to output directory
 
 usearch_binary:
     "tools/usearch" # path to usearch binary
 
 database: 
-    "virsearch_db" # path to database folder
+    "/rfs/project/rfs-42V0sRc5Rk8/databases/virsearch" # path to database folder

@@ -32,7 +32,10 @@ def checkPreds(wildcards):
 
 # rule that specifies the final expected output files
 rule all:
-    input:  
+    input:
+        expand(OUTPUT_DIR+"/{id}/virsorter2/viral_sequences.fa", id=IDS),
+        expand(OUTPUT_DIR+"/{id}/vibrant/viral_sequences.fa", id=IDS),
+        expand(OUTPUT_DIR+"/{id}/deepvirfinder/viral_sequences.fa", id=IDS),  
         expand(OUTPUT_DIR+"/{id}/final_predictions.fa", id=IDS),
         expand(OUTPUT_DIR+"/{id}/final_predictions_tax.tsv", id=IDS)
 
@@ -213,7 +216,7 @@ rule tax_class:
         "envs/checkv.yml"
     shell:
         """
-        prodigal -a {params.demovir_dir}/proteins.faa -i {input} -p meta &> /dev/null
+        prodigal-gv -a {params.demovir_dir}/proteins.faa -i {input} -p meta &> /dev/null
         {params.usearch} -ublast {params.demovir_dir}/proteins.faa -db {params.database}/uniprot_trembl.viral.udb -evalue 1e-5 -trunclabels -blast6out {params.demovir_dir}/trembl_ublast.viral.txt -threads 4 &> /dev/null
         sort -u -k1,1 {params.demovir_dir}/trembl_ublast.viral.txt > {params.demovir_dir}/trembl_ublast.viral.u.txt
         cut -f 1,2 {params.demovir_dir}/trembl_ublast.viral.u.txt | sed 's/_[0-9]\+\t/\t/' | cut -f 1 | paste {params.demovir_dir}/trembl_ublast.viral.u.txt - > {output.contig_ids}

@@ -3,6 +3,6 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - checkv
+  - checkv=1.0.1
   - cd-hit
   - r=3.6.0

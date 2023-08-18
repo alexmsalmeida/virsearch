@@ -1,12 +1,13 @@
 name: dvf
 channels:
+  - conda-forge
   - bioconda
 dependencies:
   - python=3.6
-  - numpy 
+  - numpy=1.17
   - keras=2.2.4 
-  - scikit-learn 
-  - Biopython 
+  - scikit-learn=0.20
+  - Biopython=1.74
   - h5py=2.10.0
-  - mkl-service
+  - mkl-service=2.3.0
   - theano=1.0.3

@@ -4,7 +4,7 @@ import argparse
 import sys
 
 def ren_fasta(args):
-    for line in open(args.fasta_file, "rU"):
+    for line in open(args.fasta_file, "r"):
         if line[0] == ">":
             name = line.strip("\n").replace(">","")
             print(">%s_%s" % (args.prefix, name))

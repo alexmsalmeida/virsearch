@@ -1,7 +1,9 @@
 name: vibrant
 channels:
+  - conda-forge
   - bioconda
 dependencies:
-  - numpy=1.17
+  - Biopython=1.74
+  - numpy=1.17.0
   - scikit-learn=0.21.3
   - vibrant=1.2.1

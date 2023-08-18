@@ -15,7 +15,7 @@ vs2_detect:
     output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
 
 dvf_detect:
-    mem : 30000
+    mem : 40000
     nCPU: 4
     output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
 
