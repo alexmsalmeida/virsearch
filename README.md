@@ -24,11 +24,17 @@ tar -xzvf virsearch_db.tar.gz
 
 1. Edit `config.yml` file to point to the <b>input</b>, <b>output</b> and <b>databases</b> directories, as well as the [USEARCH](https://www.drive5.com/usearch/download.html) binary location (`usearch_binary`). Input directory should contain the `.fa` assemblies to analyse.
 
-2. (option 1) Run the pipeline locally (adjust `-j` based on the number of available cores)
+2. Install the necessary conda environments through snakemake
+```
+snakemake --use-conda --conda-create-envs-only --cores 1
+```
+
+3. (option 1) Run the pipeline locally (adjust `-j` based on the number of available cores)
 ```
 snakemake --use-conda -k -j 4
 ```
-2. (option 2) Run the pipeline on a cluster (e.g., SLURM)
+
+3. (option 2) Run the pipeline on a cluster (e.g., SLURM)
 ```
 snakemake --use-conda -k -j 100 --cluster-config cluster.yml --cluster 'sbatch -A ALMEIDA-SL3-CPU -p icelake-himem --time=12:00:00 --ntasks={cluster.nCPU} --mem={cluster.mem} -o {cluster.output}'
 ```
