@@ -15,8 +15,9 @@ with open(sys.argv[2]) as f:
         line = line.rstrip()
         cols = line.split("\t")
         if cols[0] != "contig_id":
-            if int(cols[5]) > int(cols[6]) and int(cols[1]) >= 10000 and float(cols[9]) >= 50 and float(cols[12]) <= 1.0 and "contig >1.5x" not in line:
-                contigs.add(cols[0])
+            if cols[9] != "NA":
+                if int(cols[5]) > int(cols[6]) and int(cols[1]) >= 10000 and float(cols[9]) >= 50 and float(cols[12]) <= 1.0 and "contig >1.5x" not in line:
+                    contigs.add(cols[0])
 
 with open(sys.argv[1]) as f, open(sys.argv[3], "w") as fout:
     for record in SeqIO.parse(f, "fasta"):
