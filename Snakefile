@@ -159,6 +159,7 @@ rule checkv_analysis:
     output:
         OUTPUT_DIR+"/{id}/checkv/checkv_output/quality_summary.tsv"
     params:
+        rename = OUTPUT_DIR+"/{id}/checkv/viral_sequences_renamed.fa",
         outdir = OUTPUT_DIR+"/{id}/checkv/checkv_output/",
         database = config['database']+"/checkv/checkv-db-v1.0"
     conda:
@@ -166,6 +167,8 @@ rule checkv_analysis:
     shell:
         """
         rm -rf {params.outdir}
+        tools/rename_multifasta_prefix.py -f {input} -p {wildcards.id} > {params.rename}
+        mv {params.rename} {input}
         checkv end_to_end -t 8 -d {params.database} {input} {params.outdir}
         """
 
