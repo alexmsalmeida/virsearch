@@ -70,7 +70,7 @@ rule vs2_detect:
         """
         rm -rf {params.outdir}
         virsorter run -j 8 -i {input.fa} --db-dir {params.database} -w {params.outdir} --min-length 10000 all || touch {params.raw}
-        tools/rename_multifasta_prefix.py -f {params.raw} -p VS2 > {output}
+        tools/rename_multifasta_prefix.py -f {params.raw} -p {wildcards.id}_VS2 > {output}
         """
 
 # deepvirfinder
@@ -105,7 +105,7 @@ rule dvf_filter:
         """
         awk '{{if($3 > 0.9 && $4 < 0.01)print$1}}' {input.dvf} > {params.contigs}
         tools/select_seqs_by_IDs.py -i {input.fa} -d {params.contigs} -o {params.fa_ori}
-        tools/rename_multifasta_prefix.py -f {params.fa_ori} -p DVF > {output}
+        tools/rename_multifasta_prefix.py -f {params.fa_ori} -p {wildcards.id}_DVF > {output}
         rm {params.fa_ori} {params.contigs}
         """
 
@@ -129,7 +129,7 @@ rule vibrant_detect:
         if [[ ! -f {params.phages} ]]; then
             mkdir -p {params.outdir} && touch {output}
         else
-            tools/rename_multifasta_prefix.py -f {params.phages} -p VIBRANT > {output}
+            tools/rename_multifasta_prefix.py -f {params.phages} -p {wildcards.id}_VIBRANT > {output}
         fi
         """
 
@@ -159,7 +159,6 @@ rule checkv_analysis:
     output:
         OUTPUT_DIR+"/{id}/checkv/checkv_output/quality_summary.tsv"
     params:
-        rename = OUTPUT_DIR+"/{id}/checkv/viral_sequences_renamed.fa",
         outdir = OUTPUT_DIR+"/{id}/checkv/checkv_output/",
         database = config['database']+"/checkv/checkv-db-v1.0"
     conda:
@@ -167,8 +166,6 @@ rule checkv_analysis:
     shell:
         """
         rm -rf {params.outdir}
-        tools/rename_multifasta_prefix.py -f {input} -p {wildcards.id} > {params.rename}
-        mv {params.rename} {input}
         checkv end_to_end -t 8 -d {params.database} {input} {params.outdir}
         """
 
