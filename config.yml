@@ -1,13 +1,13 @@
 # Snakemake configuration
 
 input:
-    "/rds/user/aa2369/hpc-work/scripts/snakemake/virsearch/test/input" # path to input directory with .fa files
+    "/rds/project/rds-aFEMMKDjWlo/rarora/assemblies" # path to input directory with .fa files
 
 output:
-    "/rds/user/aa2369/hpc-work/scripts/snakemake/virsearch/test/output" # path to output directory
+    "/rds/project/rds-aFEMMKDjWlo/rarora/viruses" # path to output directory
 
 usearch_binary:
     "tools/usearch" # path to usearch binary
 
 database: 
-    "/rfs/project/rfs-42V0sRc5Rk8/databases/virsearch" # path to database folder
+    "/rds/project/rds-aFEMMKDjWlo/rfs_data/databases/virsearch" # path to database folder

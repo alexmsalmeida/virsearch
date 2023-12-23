@@ -87,7 +87,7 @@ rule dvf_detect:
     shell:
         """
         rm -rf {params.outdir}
-        tools/DeepVirFinder/dvf.py -i {input} -m {params.database} -o {params.outdir} -l 10000 -c 4 || touch {output}
+        tools/DeepVirFinder/dvf.py -i {input} -m {params.database} -o {params.outdir} -l 10000 || touch {output}
         """
 
 rule dvf_filter:

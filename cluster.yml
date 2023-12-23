@@ -16,7 +16,7 @@ vs2_detect:
 
 dvf_detect:
     mem : 40000
-    nCPU: 4
+    nCPU: 1
     output: "{OUTPUT_DIR}/{wildcards.id}/logs/{rule}.log"
 
 vibrant_detect:
