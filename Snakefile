@@ -28,7 +28,7 @@ def checkPreds(wildcards):
                 if line.strip() == '':
                     return OUTPUT_DIR+"/{id}/checkv/no_viruses.fa", OUTPUT_DIR+"/{id}/checkv/no_viruses_tax.tsv"
                 else:
-                    return OUTPUT_DIR+"/{id}/cdhit/nr_predictions.fa", OUTPUT_DIR+"/{id}/demovir/DemoVir_assignments.txt"
+                    return OUTPUT_DIR+"/{id}/cdhit/nr_predictions.fa", OUTPUT_DIR+"/{id}/demovir/demovir_out.tsv"
 
 # rule that specifies the final expected output files
 rule all:
@@ -206,21 +206,18 @@ rule tax_class:
     input:
         OUTPUT_DIR+"/{id}/cdhit/nr_predictions.fa"
     output:
-        tax = OUTPUT_DIR+"/{id}/demovir/DemoVir_assignments.txt",
-        contig_ids = OUTPUT_DIR+"/{id}/demovir/trembl_ublast.viral.u.contigID.txt"
+        OUTPUT_DIR+"/{id}/demovir/demovir_out.tsv"
     params:
         demovir_dir = directory(OUTPUT_DIR+"/{id}/demovir"),
-        database = config['database']+"/demovir",
-        usearch = config["usearch_binary"]
+        database = config['database']+"/demovir"
     conda:
         "envs/checkv.yml"
     shell:
         """
         prodigal-gv -a {params.demovir_dir}/proteins.faa -i {input} -p meta &> /dev/null
-        {params.usearch} -ublast {params.demovir_dir}/proteins.faa -db {params.database}/uniprot_trembl.viral.udb -evalue 1e-5 -trunclabels -blast6out {params.demovir_dir}/trembl_ublast.viral.txt -threads 4 &> /dev/null
-        sort -u -k1,1 {params.demovir_dir}/trembl_ublast.viral.txt > {params.demovir_dir}/trembl_ublast.viral.u.txt
-        cut -f 1,2 {params.demovir_dir}/trembl_ublast.viral.u.txt | sed 's/_[0-9]\+\t/\t/' | cut -f 1 | paste {params.demovir_dir}/trembl_ublast.viral.u.txt - > {output.contig_ids}
-        tools/demovir.R {params.demovir_dir} {params.database}
+        diamond blastp --threads 4 --query {params.demovir_dir}/proteins.faa --evalue 1e-5 --db {params.database}/uniprot_viruses.dmnd --outfmt 6 --out {params.demovir_dir}/diamond.out --max-target-seqs 1        
+        cut -f 1,2 {params.demovir_dir}/diamond.out | sed 's/_[0-9]\+\t/\t/' | cut -f 1 | paste {params.demovir_dir}/diamond.out - > {params.demovir_dir}/diamond_contigs.out
+        tools/demovir.R {params.demovir_dir}/diamond_contigs.out {params.database}/uniprot_viral_taxa.RDS {output}
         """
 
 # generate final output files

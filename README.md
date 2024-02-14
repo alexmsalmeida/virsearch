@@ -6,7 +6,7 @@ It first detects viral sequences in assemblies (`.fa` files) with [VirSorter2](h
 
 ## Installation
 
-1. Install [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html), [snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) (tested v6.3.0) and [USEARCH](https://www.drive5.com/usearch/download.html).
+1. Install [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) and [snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) (tested v6.3.0).
 
 2. Clone repository
 ```
@@ -20,9 +20,17 @@ wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/genome_sets/virsearch_db.ta
 tar -xzvf virsearch_db.tar.gz
 ```
 
+3.1. Download an updated Demovir database based on the UniProt 2024_01 release and the new ICTV viral taxonomy.
+
+```
+wget -O uniprot_viruses.tar.gz https://zenodo.org/records/10655918/files/uniprot_viruses.tar.gz?download=1
+tar -xzvf uniprot_viruses.tar.gz
+mv uniprot_vir* virsearch_db/demovir/
+```
+
 ## How to run
 
-1. Edit `config.yml` file to point to the <b>input</b>, <b>output</b> and <b>databases</b> directories, as well as the [USEARCH](https://www.drive5.com/usearch/download.html) binary location (`usearch_binary`). Input directory should contain the `.fa` assemblies to analyse.
+1. Edit `config.yml` file to point to the <b>input</b>, <b>output</b> and <b>databases</b> directories. Input directory should contain the `.fa` assemblies to analyse.
 
 2. Install the necessary conda environments through snakemake
 ```
