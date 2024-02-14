@@ -20,7 +20,7 @@ wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/genome_sets/virsearch_db.ta
 tar -xzvf virsearch_db.tar.gz
 ```
 
-3.1. Download an updated Demovir database based on the UniProt 2024_01 release and the new ICTV viral taxonomy.
+4. Download an updated Demovir database based on the UniProt 2024_01 release and the new ICTV viral taxonomy.
 
 ```
 wget -O uniprot_viruses.tar.gz https://zenodo.org/records/10655918/files/uniprot_viruses.tar.gz?download=1
